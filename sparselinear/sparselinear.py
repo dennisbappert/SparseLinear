@@ -211,7 +211,7 @@ class SparseLinear(nn.Module):
                 nnz = round((1.0-sparsity) * in_features * out_features)
                 if in_features * out_features <= 10**8:
                     indices = np.random.choice(in_features * out_features, nnz, replace = False)
-                    indices = torch.as_tensor(indices, device = coalesce_device)
+                    indices = torch.as_tensor(indices, device = coalesce_device, dtype=torch.long)
                     row_ind = indices.floor_divide(in_features)
                     col_ind = indices.fmod(in_features)
                 else:
